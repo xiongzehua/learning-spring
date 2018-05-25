@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     ">
+
+    <!--配置bean-->
+    <bean id="xiaoming" class="com.xiongzehua.pojo.Person">
+        <property name="name" value="小明"></property>
+        <property name="age" value="20"></property>
+        <property name="cars" ref="xiaomingCars">
+        </property>
+    </bean>
+
+    <bean id="car1" class="com.xiongzehua.pojo.Car">
+        <property name="brand" value="宝马"></property>
+        <property name="price" value="20000"></property>
+    </bean>
+
+    <bean id="car2" class="com.xiongzehua.pojo.Car">
+        <property name="brand" value="奔驰"></property>
+        <property name="price" value="30000"></property>
+    </bean>
+
+    <!--配置单独的util bean，以供多个bean进行引用,z这样多个对象就可以引用同一个集合。
+    需要导入util命名空间-->
+
+    <util:list id="xiaomingCars">
+        <ref bean="car3"></ref>
+        <ref bean="car4"></ref>
+    </util:list>
+
+    <bean id="car3" class="com.xiongzehua.pojo.Car">
+        <property name="brand" value="三轮"></property>
+        <property name="price" value="500"></property>
+    </bean>
+
+    <bean id="car4" class="com.xiongzehua.pojo.Car">
+        <property name="brand" value="小破车"></property>
+        <property name="price" value="200"></property>
+    </bean>
+
+    <bean id="xiaohong" class="com.xiongzehua.pojo.Person">
+        <property name="name" value="小红"></property>
+        <property name="age" value="20"></property>
+        <property name="cars">
+            <!--这里用的是ArrayList-->
+            <list>
+                <ref bean="car1"></ref>
+                <ref bean="car2"></ref>
+            </list>
+        </property>
+    </bean>
+
+</beans>
